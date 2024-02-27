@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2024-02-27T19:41:02 IST" name="Suite" finished-at="2024-02-27T19:41:52 IST" duration-ms="50151">
+    <groups>
+    </groups>
+    <test started-at="2024-02-27T19:41:02 IST" name="FlipkartOrderAutomation" finished-at="2024-02-27T19:41:52 IST" duration-ms="50151">
+      <class name="com.flipkart.automation.FlipkartOrderAutomation">
+        <test-method is-config="true" signature="setUpWebDriver()[pri:0, instance:com.flipkart.automation.FlipkartOrderAutomation@75d3a5e0]" started-at="2024-02-27T19:41:02 IST" name="setUpWebDriver" finished-at="2024-02-27T19:41:05 IST" duration-ms="2847" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUpWebDriver -->
+        <test-method signature="TC_001_testCompleteOrderProcess()[pri:0, instance:com.flipkart.automation.FlipkartOrderAutomation@75d3a5e0]" started-at="2024-02-27T19:41:05 IST" name="TC_001_testCompleteOrderProcess" finished-at="2024-02-27T19:41:51 IST" duration-ms="46866" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC_001_testCompleteOrderProcess -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:com.flipkart.automation.FlipkartOrderAutomation@75d3a5e0]" started-at="2024-02-27T19:41:51 IST" name="tearDown" finished-at="2024-02-27T19:41:52 IST" duration-ms="356" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- com.flipkart.automation.FlipkartOrderAutomation -->
+    </test> <!-- FlipkartOrderAutomation -->
+  </suite> <!-- Suite -->
+</testng-results>
