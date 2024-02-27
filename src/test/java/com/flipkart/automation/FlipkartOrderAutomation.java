@@ -37,7 +37,7 @@ public class FlipkartOrderAutomation {
 		openWebsite("https://www.flipkart.com"); // Open Flipkart website
 		searchForItem("ipad", By.name("q")); // Search for the specified item
 		clickOnSuggestedItem(By.xpath("//li[@class='_3D0G9a']"), By.xpath("(//div[@class='YGcVZO _2VHNef'])[2]")); // Click on the suggested item
-		applyFilter("Online Only", By.xpath("//div[contains(text(),'Brand') and @class='_2gmUFU _3V8rao']")); // Apply online only filter
+		applyFilter("Online Only", By.xpath("//div[contains(text(),'Brand') and @class='_2gmUFU _3V8rao']") , By.xpath("//div[contains(text(),'Apple')]")); // Apply online only filter
 		selectProduct(By.className("_4rR01T")); // Select the first search result
 		checkoutAndPlaceOrder(); // Proceed to checkout and place the order
 	}
@@ -68,10 +68,9 @@ public class FlipkartOrderAutomation {
 	 * @param locator the locator of the search box element
 	 * @throws InterruptedException if interrupted while waiting
 	 */
-	private void searchForItem(String item, By locator) throws InterruptedException {
+	private void searchForItem(String item, By locator) {
 		WebElement searchBox = driver.findElement(locator); // Locate the search box element
 		searchBox.sendKeys(item); // Enter the item to search for
-		Thread.sleep(3000); // Wait for suggestions to load
 	}
 
 	/**
@@ -81,22 +80,25 @@ public class FlipkartOrderAutomation {
 	 * @param elementLocator    the locator of the element to click within the suggestion
 	 */
 	private void clickOnSuggestedItem(By suggestionLocator, By elementLocator) {
-		List<WebElement> suggestionList = driver.findElements(suggestionLocator); // Find suggestion elements
-		for (WebElement suggestion : suggestionList) {
-			WebElement element = wait.until(ExpectedConditions.elementToBeClickable(elementLocator)); // Wait for the element to be clickable
-			element.click(); // Click on the element
-			break; // Break loop after clicking the first suggestion
-		}
+	    List<WebElement> suggestionList = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(suggestionLocator));
+	    for (WebElement suggestion : suggestionList) {
+	        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(elementLocator)); // Wait for the element to be clickable
+	        element.click(); // Click on the element
+	        break; // Break loop after clicking the first suggestion
+	    }
 	}
+
 
 	/**
 	 * Method to apply a filter.
 	 *
 	 * @param filterName the name of the filter to apply
 	 * @param filterLocator the locator of the filter element
+	 * @throws InterruptedException 
 	 */
-	private void applyFilter(String filterName, By filterLocator) {
+	private void applyFilter(String filterName, By filterLocator, By checkboxLocator) {
 		clickOnElement(filterLocator); // Click on the filter
+		clickOnElement(checkboxLocator); // Click on the checkbox
 	}
 
 	/**
@@ -115,7 +117,7 @@ public class FlipkartOrderAutomation {
 	 * @param locator the locator of the element to click
 	 */
 	private void clickOnElement(By locator) {
-		WebElement element = wait.until(ExpectedConditions.elementToBeClickable(locator)); // Wait for the element to be clickable
+		WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator)); // Wait for the element to be clickable
 		element.click(); // Click on the element
 	}
 
@@ -153,10 +155,10 @@ public class FlipkartOrderAutomation {
 		WebElement emailOrPhoneField = driver.findElement(By.xpath("//input[@class='_2IX_2- _17N0em']")); // Locate email or phone field
 		emailOrPhoneField.click(); // Click on the field
 		emailOrPhoneField.sendKeys(email); // Enter the generated email
-		Thread.sleep(3000); // Wait for a moment
+		Thread.sleep(1000); // Wait for a moment
 		emailOrPhoneField.clear(); // Clear the field
 		Thread.sleep(1000); // Wait for a moment
-		emailOrPhoneField.sendKeys(phoneNumber); // Enter the generated phone number
+		emailOrPhoneField.sendKeys(phoneNumber); // Enter the generated phone number		
 	}
 }
 
